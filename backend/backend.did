@@ -1,0 +1,31 @@
+type TaxPayer = 
+ record {
+   address: text;
+   firstName: text;
+   lastName: text;
+   tid: text;
+ };
+type Result_1 = 
+ variant {
+   err: Error;
+   ok: TaxPayer;
+ };
+type Result = 
+ variant {
+   err: Error;
+   ok;
+ };
+type Error = 
+ variant {
+   AlreadyExists;
+   InvalidInput;
+   NotFound;
+ };
+service : {
+  addTaxPayer: (TaxPayer) -> (Result);
+  deleteTaxPayer: (text) -> (Result);
+  getAllTaxPayers: () -> (vec TaxPayer) query;
+  getTaxPayer: (text) -> (Result_1) query;
+  searchTaxPayers: (text) -> (vec TaxPayer) query;
+  updateTaxPayer: (TaxPayer) -> (Result);
+}
